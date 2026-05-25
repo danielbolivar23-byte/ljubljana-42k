@@ -14,9 +14,11 @@
 <title>Ljubljana 42K</title>
 <style>
   :root {
-    --black:#0d0d0d; --dark:#111; --card:#181818;
-    --white:#f5f5f5; --gray:#888;
-    --green:#8DC63F; --green-dark:#6fa832; --green-dim:rgba(141,198,63,0.15);
+    --black:#0d0d0d; --dark:#111; --card:#181818; --card2:#1e1e1e;
+    --white:#ffffff;
+    --gray:#aaaaaa;
+    --gray-dim:#666;
+    --green:#8DC63F; --green-dark:#6fa832;
     --safe-top:env(safe-area-inset-top,0px);
     --safe-bottom:env(safe-area-inset-bottom,0px);
   }
@@ -24,11 +26,11 @@
   html,body{height:100%;overscroll-behavior:none;}
   body{
     background:var(--black);color:var(--white);
-    font-family:'DM Sans',sans-serif;font-weight:300;
+    font-family:'DM Sans',sans-serif;font-weight:400;
     padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
   }
 
-  /* ── INSTALL BANNER ── */
+  /* INSTALL BANNER */
   #install-banner{
     display:none;position:fixed;bottom:calc(16px + var(--safe-bottom));
     left:16px;right:16px;z-index:999;
@@ -38,190 +40,129 @@
     align-items:center;gap:12px;
   }
   #install-banner.show{display:flex;}
-  #install-banner p{flex:1;font-size:13px;color:#ccc;line-height:1.5;}
-  #install-banner p strong{color:var(--white);display:block;margin-bottom:2px;}
-  .install-btn{
-    background:var(--green);color:#000;border:none;
-    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
-    letter-spacing:1px;text-transform:uppercase;
-    padding:10px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;
-  }
-  .dismiss-btn{background:transparent;border:none;color:#555;font-size:22px;cursor:pointer;padding:2px;}
+  #install-banner p{flex:1;font-size:13px;color:#ddd;line-height:1.5;}
+  #install-banner p strong{color:#fff;display:block;margin-bottom:2px;}
+  .install-btn{background:var(--green);color:#000;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;}
+  .dismiss-btn{background:transparent;border:none;color:#666;font-size:22px;cursor:pointer;padding:2px;}
 
-  /* ── HERO HEADER ── */
-  .hero{
-    position:relative;overflow:hidden;
-    background:#0d0d0d;
-    border-bottom:2px solid var(--green);
-    padding-bottom:0;
-  }
-  .hero-img{
-    width:100%;height:160px;object-fit:cover;
-    display:block;opacity:0.35;filter:grayscale(30%);
-  }
+  /* HERO */
+  .hero{position:relative;overflow:hidden;background:#0a0a0a;border-bottom:3px solid var(--green);}
+  .hero-img{width:100%;height:180px;object-fit:cover;display:block;opacity:0.4;filter:grayscale(20%) contrast(1.1);}
   .hero-overlay{
     position:absolute;inset:0;
-    background:linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.85) 70%, #0d0d0d 100%);
+    background:linear-gradient(to bottom, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.75) 60%, #0d0d0d 100%);
     display:flex;flex-direction:column;justify-content:flex-end;
-    padding:0 20px 0;
+    padding:0 20px 18px;
   }
-  .hero-logo{
-    width:120px;margin-bottom:8px;filter:brightness(0) invert(1);opacity:0.9;
-  }
-  .hero-title{
-    font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;
-    color:var(--white);letter-spacing:1px;
-  }
+  .hero-logo-wrap{margin-bottom:10px;}
+  .hero-logo{height:36px;filter:brightness(0) invert(1);opacity:0.95;}
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#fff;letter-spacing:1px;}
   .hero-title span{color:var(--green);}
-  .hero-sub{font-size:10px;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-top:4px;padding-bottom:16px;}
+  .hero-sub{font-size:11px;letter-spacing:3px;color:#ccc;text-transform:uppercase;margin-top:5px;}
 
-  /* ── STATS ROW ── */
-  .stats-row{
-    display:flex;background:var(--dark);
-    border-bottom:1px solid #1e1e1e;
-  }
-  .stat-cell{
-    flex:1;padding:12px 8px;text-align:center;
-    border-right:1px solid #1e1e1e;
-  }
+  /* STATS */
+  .stats-row{display:flex;background:var(--dark);border-bottom:1px solid #222;}
+  .stat-cell{flex:1;padding:12px 6px;text-align:center;border-right:1px solid #222;}
   .stat-cell:last-child{border-right:none;}
   .stat-cell .n{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);line-height:1;}
-  .stat-cell .l{font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
+  .stat-cell .l{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
 
-  /* ── GLOBAL BAR ── */
-  .global-wrap{
-    padding:12px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;
-    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-  }
-  .g-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);white-space:nowrap;}
+  /* GLOBAL BAR */
+  .global-wrap{padding:12px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .g-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#aaa;white-space:nowrap;}
   .g-bar-out{flex:1;min-width:80px;height:6px;background:#2a2a2a;border-radius:3px;overflow:hidden;}
   .g-bar-in{height:100%;background:linear-gradient(90deg,var(--green-dark),var(--green));border-radius:3px;transition:width 0.4s ease;}
   .g-pct{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);min-width:44px;text-align:right;line-height:1;}
-  .g-km{font-size:12px;color:var(--gray);white-space:nowrap;}
-  .g-km span{color:var(--white);font-weight:600;}
-  .reset-btn{
-    background:transparent;border:1px solid #2a2a2a;color:#444;
-    font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1.5px;
-    text-transform:uppercase;padding:5px 10px;border-radius:6px;cursor:pointer;
-    transition:all 0.2s;
-  }
-  .reset-btn:active{border-color:#555;color:#888;}
+  .g-km{font-size:12px;color:#aaa;white-space:nowrap;}
+  .g-km span{color:#fff;font-weight:600;}
+  .reset-btn{background:transparent;border:1px solid #333;color:#666;font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 10px;border-radius:6px;cursor:pointer;}
+  .reset-btn:active{border-color:#666;color:#aaa;}
 
-  /* ── LEGEND ── */
-  .legend{
-    display:flex;gap:10px;flex-wrap:wrap;
-    padding:10px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;
-  }
-  .li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;}
+  /* LEGEND */
+  .legend{display:flex;gap:10px;flex-wrap:wrap;padding:10px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;}
+  .li{display:flex;align-items:center;gap:5px;font-size:10px;color:#ccc;text-transform:uppercase;letter-spacing:0.8px;}
   .ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
-  /* ── PHASES ── */
-  .phase-hdr{
-    padding:20px 20px 10px;display:flex;align-items:center;gap:12px;
-    border-top:1px solid #181818;
-  }
-  .ph-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:#1e1e1e;line-height:1;}
-  .ph-info h2{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:var(--white);}
-  .ph-info p{font-size:10px;color:var(--gray);margin-top:2px;}
+  /* PHASES */
+  .phase-hdr{padding:20px 20px 10px;display:flex;align-items:center;gap:12px;border-top:1px solid #181818;}
+  .ph-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:#222;line-height:1;}
+  .ph-info h2{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:#fff;}
+  .ph-info p{font-size:10px;color:#aaa;margin-top:2px;}
   .ph-bar{height:2px;margin:0 20px 16px;border-radius:2px;}
 
-  /* ── WEEKS ── */
+  /* WEEKS */
   .weeks{display:flex;flex-direction:column;gap:10px;padding:0 20px 20px;}
+  .week-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #222;}
+  .week-card.complete{border-color:rgba(141,198,63,0.4);}
+  .week-card.race-week{border-color:var(--green);box-shadow:0 0 20px rgba(141,198,63,0.12);}
 
-  .week-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #1e1e1e;}
-  .week-card.complete{border-color:rgba(141,198,63,0.35);}
-  .week-card.race-week{border-color:var(--green);box-shadow:0 0 20px rgba(141,198,63,0.1);}
-
-  .wk-head{
-    padding:11px 14px;background:#1e1e1e;
-    display:flex;justify-content:space-between;align-items:center;
-  }
-  .wk-left .wn{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gray);text-transform:uppercase;}
-  .wk-left .wd{font-size:10px;color:#3a3a3a;margin-top:1px;}
+  .wk-head{padding:11px 14px;background:#1e1e1e;display:flex;justify-content:space-between;align-items:center;}
+  .wk-left .wn{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:#bbb;text-transform:uppercase;}
+  .wk-left .wd{font-size:10px;color:#555;margin-top:1px;}
   .wk-right{display:flex;align-items:center;gap:8px;}
   .wk-km-track{text-align:right;}
   .km-line{display:flex;align-items:baseline;gap:3px;justify-content:flex-end;}
   .km-done{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);line-height:1;transition:color 0.2s;}
-  .km-done.zero{color:#2a2a2a;}
-  .km-sep{font-size:11px;color:#333;}
-  .km-total-val{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#444;line-height:1;}
-  .km-unit{font-size:10px;color:#333;margin-left:1px;}
+  .km-done.zero{color:#333;}
+  .km-sep{font-size:11px;color:#444;}
+  .km-total-val{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#555;line-height:1;}
+  .km-unit{font-size:10px;color:#444;margin-left:1px;}
   .wk-prog-bar{width:50px;height:3px;background:#2a2a2a;border-radius:2px;overflow:hidden;margin-top:4px;}
   .wk-prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.3s;}
 
-  /* ── DAYS ── */
+  /* DAYS */
   .wk-body{padding:6px 14px 12px;}
   .day-row{
     display:flex;align-items:center;gap:8px;
-    padding:8px 5px;border-bottom:1px solid #202020;
+    padding:9px 5px;border-bottom:1px solid #202020;
     cursor:pointer;border-radius:6px;
     -webkit-user-select:none;user-select:none;
     transition:background 0.1s;
   }
   .day-row:last-child{border-bottom:none;}
-  .day-row:active:not(.rest){background:rgba(141,198,63,0.05);}
-  .day-row.rest{cursor:default;opacity:0.35;}
+  .day-row:active:not(.rest){background:rgba(141,198,63,0.06);}
+  .day-row.rest{cursor:default;opacity:0.3;}
 
   .chk-wrap{flex-shrink:0;width:22px;height:22px;position:relative;}
   .chk-wrap input[type=checkbox]{opacity:0;position:absolute;width:100%;height:100%;cursor:pointer;z-index:2;margin:0;}
-  .chk-box{
-    width:22px;height:22px;border:1.5px solid #2e2e2e;border-radius:6px;
-    display:flex;align-items:center;justify-content:center;
-    transition:all 0.15s;background:transparent;pointer-events:none;
-  }
+  .chk-box{width:22px;height:22px;border:1.5px solid #333;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;background:transparent;pointer-events:none;}
   .chk-wrap input:checked ~ .chk-box{background:var(--green);border-color:var(--green);}
-  .chk-wrap input:checked ~ .chk-box::after{
-    content:'';display:block;width:5px;height:9px;
-    border:2px solid #000;border-top:none;border-left:none;
-    transform:rotate(45deg) translateY(-1px);
-  }
+  .chk-wrap input:checked ~ .chk-box::after{content:'';display:block;width:5px;height:9px;border:2px solid #000;border-top:none;border-left:none;transform:rotate(45deg) translateY(-1px);}
 
-  .day-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);min-width:26px;}
-  .day-pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;flex-shrink:0;}
-  .pill-s{background:rgba(141,198,63,0.12);color:#8DC63F;}
-  .pill-f{background:rgba(141,198,63,0.22);color:#b2e060;}
-  .pill-r{background:rgba(255,100,50,0.15);color:#ff7a4a;}
-  .pill-t{background:rgba(255,200,50,0.15);color:#ffc840;}
-  .pill-e{background:rgba(80,180,255,0.15);color:#60b8ff;}
-  .pill-x{background:rgba(60,60,60,0.3);color:#333;font-size:10px;}
-  .pill-race{background:rgba(141,198,63,0.25);color:var(--green);font-weight:700;}
+  .day-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#bbb;min-width:26px;font-weight:500;}
+  .day-pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0;}
+  .pill-s{background:rgba(141,198,63,0.15);color:#a8d96e;}
+  .pill-f{background:rgba(141,198,63,0.28);color:#c5eb8a;}
+  .pill-r{background:rgba(255,100,50,0.18);color:#ff8c6a;}
+  .pill-t{background:rgba(255,200,50,0.18);color:#ffd060;}
+  .pill-e{background:rgba(80,180,255,0.18);color:#80caff;}
+  .pill-x{background:rgba(60,60,60,0.25);color:#444;font-size:10px;}
+  .pill-race{background:rgba(141,198,63,0.3);color:var(--green);font-weight:700;}
 
-  .day-desc{font-size:11px;color:#555;flex:1;line-height:1.4;min-width:0;}
-  .day-km-badge{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#333;white-space:nowrap;flex-shrink:0;transition:color 0.2s;}
+  /* KEY: white text for descriptions */
+  .day-desc{font-size:11.5px;color:#ffffff;flex:1;line-height:1.45;min-width:0;font-weight:400;}
+  .day-km-badge{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#555;white-space:nowrap;flex-shrink:0;transition:color 0.2s;}
   .day-row.checked .day-km-badge{color:var(--green);}
-  .day-row.checked .day-desc{color:#333;text-decoration:line-through;text-decoration-color:#2a2a2a;}
-  .day-row.checked .day-label{color:#2e2e2e;}
+  .day-row.checked .day-desc{color:#555;text-decoration:line-through;text-decoration-color:#333;}
+  .day-row.checked .day-label{color:#333;}
 
-  .rec-badge{
-    display:inline-block;background:rgba(255,200,50,0.08);color:#ffc840;
-    font-size:8px;letter-spacing:2px;text-transform:uppercase;
-    padding:1px 5px;border-radius:3px;border:1px solid rgba(255,200,50,0.2);margin-left:6px;
-  }
+  .rec-badge{display:inline-block;background:rgba(255,200,50,0.1);color:#ffd060;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:1px 5px;border-radius:3px;border:1px solid rgba(255,200,50,0.2);margin-left:6px;}
 
-  /* ── CITY BANNER ── */
-  .city-banner{
-    margin:0 20px 20px;border-radius:12px;overflow:hidden;
-    position:relative;height:100px;
-  }
-  .city-banner img{width:100%;height:100%;object-fit:cover;opacity:0.5;filter:grayscale(20%);}
+  /* CITY BANNERS */
+  .city-banner{margin:4px 20px 20px;border-radius:12px;overflow:hidden;position:relative;height:110px;}
+  .city-banner-img{width:100%;height:100%;object-fit:cover;display:block;}
   .city-banner-overlay{
     position:absolute;inset:0;
-    background:linear-gradient(90deg,rgba(13,13,13,0.8),rgba(13,13,13,0.2));
+    background:linear-gradient(90deg,rgba(13,13,13,0.82) 0%,rgba(13,13,13,0.3) 100%);
     display:flex;align-items:center;padding:0 20px;
   }
-  .city-banner-overlay p{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);}
-  .city-banner-overlay p span{color:var(--green);}
+  .city-banner-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;line-height:1.3;}
+  .city-banner-text span{color:var(--green);}
 
-  /* ── FOOTER ── */
-  footer{
-    padding:20px 20px calc(20px + var(--safe-bottom));
-    border-top:1px solid #181818;text-align:center;
-  }
-  .footer-logo{
-    width:90px;margin:0 auto 10px;
-    filter:brightness(0) invert(1);opacity:0.25;display:block;
-  }
-  footer p{font-size:10px;color:#2a2a2a;margin-bottom:3px;}
+  /* FOOTER */
+  footer{padding:20px 20px calc(20px + var(--safe-bottom));border-top:1px solid #181818;text-align:center;}
+  .footer-logo{height:28px;margin:0 auto 10px;filter:brightness(0) invert(1);opacity:0.2;display:block;}
+  footer p{font-size:10px;color:#333;margin-bottom:4px;}
   footer .goal{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--green);letter-spacing:2px;}
 </style>
 </head>
@@ -233,43 +174,30 @@
   <button class="dismiss-btn" id="dismiss-btn">×</button>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <img class="hero-img" 
+  <img class="hero-img"
     src="https://ljubljanskimaraton.si/enupload/gallery/667/maraton1.gif"
-    onerror="this.style.display='none'"
+    onerror="this.style.height='80px';this.style.opacity='0'"
     alt="Ljubljana Marathon">
   <div class="hero-overlay">
-    <img class="hero-logo"
-      src="https://ljubljanskimaraton.si/images/nlb-lj-maraton_logop.svg"
-      onerror="this.style.display='none'"
-      alt="NLB Ljubljana Maraton">
+    <div class="hero-logo-wrap">
+      <img class="hero-logo"
+        src="https://ljubljanskimaraton.si/images/nlb-lj-maraton_logop.svg"
+        onerror="this.style.display='none'"
+        alt="NLB Ljubljana Maraton">
+    </div>
     <div class="hero-title">TRACKER <span>42K</span></div>
     <div class="hero-sub">Heineken 0.0 Marathon · Ljubljana · 18 Oct 2026</div>
   </div>
 </div>
 
-<!-- STATS -->
 <div class="stats-row">
-  <div class="stat-cell">
-    <div class="n" id="stat-km-done">0</div>
-    <div class="l">km hechos</div>
-  </div>
-  <div class="stat-cell">
-    <div class="n" id="stat-km-total">0</div>
-    <div class="l">km plan</div>
-  </div>
-  <div class="stat-cell">
-    <div class="n" id="stat-sessions">0/0</div>
-    <div class="l">sesiones</div>
-  </div>
-  <div class="stat-cell">
-    <div class="n">20</div>
-    <div class="l">semanas</div>
-  </div>
+  <div class="stat-cell"><div class="n" id="stat-km-done">0</div><div class="l">km hechos</div></div>
+  <div class="stat-cell"><div class="n" id="stat-km-total">0</div><div class="l">km plan</div></div>
+  <div class="stat-cell"><div class="n" id="stat-sessions">0/0</div><div class="l">sesiones</div></div>
+  <div class="stat-cell"><div class="n">20</div><div class="l">semanas</div></div>
 </div>
 
-<!-- GLOBAL BAR -->
 <div class="global-wrap">
   <div class="g-label">Progreso</div>
   <div class="g-bar-out"><div class="g-bar-in" id="global-fill" style="width:0%"></div></div>
@@ -278,13 +206,12 @@
   <button class="reset-btn" onclick="resetAll()">↺</button>
 </div>
 
-<!-- LEGEND -->
 <div class="legend">
-  <div class="li"><div class="ld" style="background:#8DC63F"></div>Suave</div>
-  <div class="li"><div class="ld" style="background:#b2e060"></div>Fondo</div>
-  <div class="li"><div class="ld" style="background:#ff7a4a"></div>Series</div>
-  <div class="li"><div class="ld" style="background:#ffc840"></div>Tempo</div>
-  <div class="li"><div class="ld" style="background:#60b8ff"></div>Específico</div>
+  <div class="li"><div class="ld" style="background:#a8d96e"></div>Suave</div>
+  <div class="li"><div class="ld" style="background:#c5eb8a"></div>Fondo</div>
+  <div class="li"><div class="ld" style="background:#ff8c6a"></div>Series</div>
+  <div class="li"><div class="ld" style="background:#ffd060"></div>Tempo</div>
+  <div class="li"><div class="ld" style="background:#80caff"></div>Específico</div>
 </div>
 
 <div id="plan"></div>
@@ -292,8 +219,7 @@
 <footer>
   <img class="footer-logo"
     src="https://ljubljanskimaraton.si/images/nlb-lj-maraton_logop.svg"
-    onerror="this.style.display='none'"
-    alt="NLB Ljubljana Maraton">
+    onerror="this.style.display='none'" alt="">
   <p>Progreso guardado en tu dispositivo · Funciona offline</p>
   <div class="goal">18 OCT 2026 · LJUBLJANA · ≤ 3:08:00</div>
 </footer>
@@ -304,13 +230,13 @@ if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').cat
 let deferredPrompt=null;
 const banner=document.getElementById('install-banner');
 window.addEventListener('beforeinstallprompt',e=>{
-  e.preventDefault(); deferredPrompt=e;
+  e.preventDefault();deferredPrompt=e;
   if(!localStorage.getItem('pwa-dismissed')) banner.classList.add('show');
 });
 document.getElementById('install-btn').addEventListener('click',async()=>{
   if(!deferredPrompt) return;
   deferredPrompt.prompt();
-  const {outcome}=await deferredPrompt.userChoice;
+  const{outcome}=await deferredPrompt.userChoice;
   if(outcome==='accepted') banner.classList.remove('show');
   deferredPrompt=null;
 });
@@ -320,6 +246,23 @@ document.getElementById('dismiss-btn').addEventListener('click',()=>{
 });
 
 const STORAGE_KEY='tracker_ljubljana_2026_v2';
+
+// City banners between phases - using Wikimedia Commons reliable URLs
+const cityBanners=[
+  {
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ljubljana_Triple_Bridge_at_night.jpg/800px-Ljubljana_Triple_Bridge_at_night.jpg',
+    label:'TROMOSTOVJE · <span>TRIPLE BRIDGE</span>'
+  },
+  {
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Ljubljana_-_Old_Town_%28Staro_Mesto%29.jpg/800px-Ljubljana_-_Old_Town_%28Staro_Mesto%29.jpg',
+    label:'<span>STARI TRG</span> · OLD TOWN'
+  },
+  {
+    img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ljubljana_castle_%282%29.jpg/800px-Ljubljana_castle_%282%29.jpg',
+    label:'<span>LJUBLJANSKI GRAD</span> · CASTLE'
+  },
+];
+
 const phases=[
   {num:'01',name:'BASE AERÓBICA',desc:'Semanas 1–5 · Jun 2 – Jul 6 · 40→55 km/sem',bar:'linear-gradient(90deg,#2d5a1b,#1a3a5c)',weeks:[
     {n:'Semana 1',d:'2–8 Jun',km:42,recovery:false,days:[
@@ -603,24 +546,17 @@ function render(){
         </div>`;
       });
       html+=`</div></div>`;
-      // City banner between phases
-      if(isRace){
-        html+=`<div style="height:8px"></div>`;
-      }
       wIdx++;
     });
-    // Ljubljana photo banner between phases
-    if(phIdx<phases.length-1){
-      const cityImgs=[
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Ljubljana_Triple_Bridge.jpg/1280px-Ljubljana_Triple_Bridge.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ljubljana_castle.jpg/1280px-Ljubljana_castle.jpg',
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ljubljana_-_Old_Town.jpg/1280px-Ljubljana_-_Old_Town.jpg',
-      ];
-      const labels=['TRIPLE BRIDGE · LJUBLJANA','LJUBLJANA CASTLE','STARI TRG · OLD TOWN'];
-      html+=`</div>
-      <div class="city-banner">
-        <img src="${cityImgs[phIdx%3]}" onerror="this.style.display='none'" alt="Ljubljana" loading="lazy">
-        <div class="city-banner-overlay"><p><span>LJUBLJANA</span> · ${labels[phIdx%3]}</p></div>
+    // City photo banner between phases
+    if(phIdx < phases.length-1){
+      const b=cityBanners[phIdx%cityBanners.length];
+      html+=`</div><div class="city-banner">
+        <img class="city-banner-img" src="${b.img}" loading="lazy"
+          onerror="this.parentElement.style.display='none'" alt="Ljubljana">
+        <div class="city-banner-overlay">
+          <div class="city-banner-text">${b.label}</div>
+        </div>
       </div>`;
     } else {
       html+=`</div>`;
