@@ -7,544 +7,567 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ljubljana 42K">
-<meta name="theme-color" content="#e8500a">
-<meta name="description" content="Tracker de entrenamiento Maratón Ljubljana 18 Oct 2026">
-<title>Ljubljana 42K</title>
+<meta name="theme-color" content="#8DC63F">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>Ljubljana 42K</title>
 <style>
   :root {
-    --black:#0a0a0a; --white:#f5f2ed; --orange:#e8500a;
-    --gray:#1e1e1e; --light:#888; --green:#4caf7d; --yellow:#f0a500;
-    --safe-top: env(safe-area-inset-top, 0px);
-    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --black:#0d0d0d; --dark:#111; --card:#181818;
+    --white:#f5f5f5; --gray:#888;
+    --green:#8DC63F; --green-dark:#6fa832; --green-dim:rgba(141,198,63,0.15);
+    --safe-top:env(safe-area-inset-top,0px);
+    --safe-bottom:env(safe-area-inset-bottom,0px);
   }
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html, body { height:100%; overscroll-behavior:none; }
-  body {
-    background:var(--black); color:var(--white);
-    font-family:'DM Sans',sans-serif; font-weight:300;
-    padding-top:var(--safe-top);
-    padding-bottom:var(--safe-bottom);
-  }
-
-  /* INSTALL BANNER */
-  #install-banner {
-    display:none; position:fixed; bottom:calc(16px + var(--safe-bottom));
-    left:16px; right:16px; z-index:999;
-    background:#1a1a1a; border:1px solid var(--orange);
-    border-radius:14px; padding:16px 20px;
-    box-shadow:0 8px 32px rgba(0,0,0,0.6);
-    align-items:center; gap:14px;
-  }
-  #install-banner.show { display:flex; }
-  #install-banner p { flex:1; font-size:13px; color:#ccc; line-height:1.5; }
-  #install-banner p strong { color:var(--white); display:block; margin-bottom:2px; }
-  .install-btn {
-    background:var(--orange); color:#fff; border:none;
-    font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
-    letter-spacing:1px; text-transform:uppercase;
-    padding:10px 16px; border-radius:8px; cursor:pointer; white-space:nowrap;
-  }
-  .dismiss-btn {
-    background:transparent; border:none; color:#555;
-    font-size:20px; cursor:pointer; padding:4px; line-height:1;
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overscroll-behavior:none;}
+  body{
+    background:var(--black);color:var(--white);
+    font-family:'DM Sans',sans-serif;font-weight:300;
+    padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
   }
 
-  /* HEADER */
-  header {
-    padding:28px 20px 20px; border-bottom:1px solid #1a1a1a;
-    position:relative; overflow:hidden;
+  /* ── INSTALL BANNER ── */
+  #install-banner{
+    display:none;position:fixed;bottom:calc(16px + var(--safe-bottom));
+    left:16px;right:16px;z-index:999;
+    background:#1a1a1a;border:1px solid var(--green);
+    border-radius:14px;padding:16px 18px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.7);
+    align-items:center;gap:12px;
   }
-  header::before {
-    content:'LJUBLJANA'; position:absolute; right:-8px; top:-6px;
-    font-family:'Bebas Neue',sans-serif; font-size:90px;
-    color:#111; pointer-events:none; user-select:none;
+  #install-banner.show{display:flex;}
+  #install-banner p{flex:1;font-size:13px;color:#ccc;line-height:1.5;}
+  #install-banner p strong{color:var(--white);display:block;margin-bottom:2px;}
+  .install-btn{
+    background:var(--green);color:#000;border:none;
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;
+    padding:10px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;
   }
-  .h-inner { position:relative; z-index:1; }
-  .h-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
-  .h-title h1 { font-family:'Bebas Neue',sans-serif; font-size:44px; line-height:1; }
-  .h-title h1 span { color:var(--orange); }
-  .h-title p { font-size:10px; letter-spacing:2px; color:var(--light); text-transform:uppercase; margin-top:5px; }
-  .h-stats { display:flex; gap:18px; flex-wrap:wrap; }
-  .hstat { text-align:right; }
-  .hstat .n { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--orange); line-height:1; }
-  .hstat .l { font-size:9px; color:var(--light); text-transform:uppercase; letter-spacing:1.5px; margin-top:1px; }
+  .dismiss-btn{background:transparent;border:none;color:#555;font-size:22px;cursor:pointer;padding:2px;}
 
-  /* GLOBAL BAR */
-  .global-bar-wrap {
-    padding:14px 20px; background:#111; border-bottom:1px solid #1a1a1a;
-    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  /* ── HERO HEADER ── */
+  .hero{
+    position:relative;overflow:hidden;
+    background:#0d0d0d;
+    border-bottom:2px solid var(--green);
+    padding-bottom:0;
   }
-  .global-label { font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--light); white-space:nowrap; }
-  .global-bar-outer { flex:1; min-width:120px; height:7px; background:#2a2a2a; border-radius:4px; overflow:hidden; }
-  .global-bar-inner { height:100%; background:linear-gradient(90deg,var(--orange),#f0a500); border-radius:4px; transition:width 0.4s ease; }
-  .global-pct { font-family:'Bebas Neue',sans-serif; font-size:24px; color:var(--orange); min-width:44px; text-align:right; line-height:1; }
-  .global-km { font-size:12px; color:var(--light); white-space:nowrap; }
-  .global-km span { color:var(--white); font-weight:600; }
-  .reset-btn {
-    background:transparent; border:1px solid #333; color:#555;
-    font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:2px;
-    text-transform:uppercase; padding:5px 12px; border-radius:6px; cursor:pointer;
+  .hero-img{
+    width:100%;height:160px;object-fit:cover;
+    display:block;opacity:0.35;filter:grayscale(30%);
   }
-  .reset-btn:active { border-color:#666; color:#999; }
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.85) 70%, #0d0d0d 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:0 20px 0;
+  }
+  .hero-logo{
+    width:120px;margin-bottom:8px;filter:brightness(0) invert(1);opacity:0.9;
+  }
+  .hero-title{
+    font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;
+    color:var(--white);letter-spacing:1px;
+  }
+  .hero-title span{color:var(--green);}
+  .hero-sub{font-size:10px;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-top:4px;padding-bottom:16px;}
 
-  /* LEGEND */
-  .legend {
-    display:flex; gap:12px; flex-wrap:wrap;
-    padding:12px 20px; background:#111; border-bottom:1px solid #1a1a1a;
+  /* ── STATS ROW ── */
+  .stats-row{
+    display:flex;background:var(--dark);
+    border-bottom:1px solid #1e1e1e;
   }
-  .li { display:flex; align-items:center; gap:5px; font-size:10px; color:var(--light); text-transform:uppercase; letter-spacing:1px; }
-  .ld { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .stat-cell{
+    flex:1;padding:12px 8px;text-align:center;
+    border-right:1px solid #1e1e1e;
+  }
+  .stat-cell:last-child{border-right:none;}
+  .stat-cell .n{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);line-height:1;}
+  .stat-cell .l{font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
 
-  /* PHASES */
-  .phase-hdr {
-    padding:20px 20px 10px; display:flex; align-items:center; gap:12px;
+  /* ── GLOBAL BAR ── */
+  .global-wrap{
+    padding:12px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  .g-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gray);white-space:nowrap;}
+  .g-bar-out{flex:1;min-width:80px;height:6px;background:#2a2a2a;border-radius:3px;overflow:hidden;}
+  .g-bar-in{height:100%;background:linear-gradient(90deg,var(--green-dark),var(--green));border-radius:3px;transition:width 0.4s ease;}
+  .g-pct{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);min-width:44px;text-align:right;line-height:1;}
+  .g-km{font-size:12px;color:var(--gray);white-space:nowrap;}
+  .g-km span{color:var(--white);font-weight:600;}
+  .reset-btn{
+    background:transparent;border:1px solid #2a2a2a;color:#444;
+    font-family:'DM Sans',sans-serif;font-size:10px;letter-spacing:1.5px;
+    text-transform:uppercase;padding:5px 10px;border-radius:6px;cursor:pointer;
+    transition:all 0.2s;
+  }
+  .reset-btn:active{border-color:#555;color:#888;}
+
+  /* ── LEGEND ── */
+  .legend{
+    display:flex;gap:10px;flex-wrap:wrap;
+    padding:10px 20px;background:var(--dark);border-bottom:1px solid #1a1a1a;
+  }
+  .li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--gray);text-transform:uppercase;letter-spacing:0.8px;}
+  .ld{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+  /* ── PHASES ── */
+  .phase-hdr{
+    padding:20px 20px 10px;display:flex;align-items:center;gap:12px;
     border-top:1px solid #181818;
   }
-  .ph-num { font-family:'Bebas Neue',sans-serif; font-size:36px; color:#1e1e1e; line-height:1; }
-  .ph-info h2 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; }
-  .ph-info p { font-size:10px; color:var(--light); margin-top:2px; }
-  .ph-bar { height:2px; margin:0 20px 16px; border-radius:2px; }
+  .ph-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:#1e1e1e;line-height:1;}
+  .ph-info h2{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:var(--white);}
+  .ph-info p{font-size:10px;color:var(--gray);margin-top:2px;}
+  .ph-bar{height:2px;margin:0 20px 16px;border-radius:2px;}
 
-  /* WEEKS */
-  .weeks { display:flex; flex-direction:column; gap:12px; padding:0 20px 20px; }
+  /* ── WEEKS ── */
+  .weeks{display:flex;flex-direction:column;gap:10px;padding:0 20px 20px;}
 
-  .week-card { background:var(--gray); border-radius:12px; overflow:hidden; }
-  .week-card.complete { border:1px solid rgba(76,175,125,0.35); }
-  .week-card.race-week { border:1px solid var(--orange); box-shadow:0 0 20px rgba(232,80,10,0.1); }
+  .week-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #1e1e1e;}
+  .week-card.complete{border-color:rgba(141,198,63,0.35);}
+  .week-card.race-week{border-color:var(--green);box-shadow:0 0 20px rgba(141,198,63,0.1);}
 
-  .wk-head {
-    padding:12px 14px; background:#242424;
-    display:flex; justify-content:space-between; align-items:center;
+  .wk-head{
+    padding:11px 14px;background:#1e1e1e;
+    display:flex;justify-content:space-between;align-items:center;
   }
-  .wk-left .wn { font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:3px; color:var(--light); text-transform:uppercase; }
-  .wk-left .wd { font-size:10px; color:#444; margin-top:1px; }
-  .wk-right { display:flex; align-items:center; gap:10px; }
-  .wk-km-track { text-align:right; }
-  .wk-km-track .km-line { display:flex; align-items:baseline; gap:3px; justify-content:flex-end; }
-  .km-done { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--green); line-height:1; transition:color 0.2s; }
-  .km-done.zero { color:#383838; }
-  .km-sep { font-size:11px; color:#444; }
-  .km-total-val { font-family:'Bebas Neue',sans-serif; font-size:16px; color:#555; line-height:1; }
-  .km-unit { font-size:10px; color:#444; margin-left:2px; }
-  .wk-prog-bar { width:56px; height:3px; background:#333; border-radius:2px; overflow:hidden; margin-top:4px; }
-  .wk-prog-fill { height:100%; background:var(--green); border-radius:2px; transition:width 0.3s; }
+  .wk-left .wn{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:var(--gray);text-transform:uppercase;}
+  .wk-left .wd{font-size:10px;color:#3a3a3a;margin-top:1px;}
+  .wk-right{display:flex;align-items:center;gap:8px;}
+  .wk-km-track{text-align:right;}
+  .km-line{display:flex;align-items:baseline;gap:3px;justify-content:flex-end;}
+  .km-done{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);line-height:1;transition:color 0.2s;}
+  .km-done.zero{color:#2a2a2a;}
+  .km-sep{font-size:11px;color:#333;}
+  .km-total-val{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#444;line-height:1;}
+  .km-unit{font-size:10px;color:#333;margin-left:1px;}
+  .wk-prog-bar{width:50px;height:3px;background:#2a2a2a;border-radius:2px;overflow:hidden;margin-top:4px;}
+  .wk-prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.3s;}
 
-  /* DAYS */
-  .wk-body { padding:8px 14px 12px; }
-  .day-row {
-    display:flex; align-items:center; gap:8px;
-    padding:8px 6px; border-bottom:1px solid #282828;
-    cursor:pointer; border-radius:6px;
+  /* ── DAYS ── */
+  .wk-body{padding:6px 14px 12px;}
+  .day-row{
+    display:flex;align-items:center;gap:8px;
+    padding:8px 5px;border-bottom:1px solid #202020;
+    cursor:pointer;border-radius:6px;
+    -webkit-user-select:none;user-select:none;
     transition:background 0.1s;
-    -webkit-user-select:none; user-select:none;
   }
-  .day-row:last-child { border-bottom:none; }
-  .day-row:active:not(.rest) { background:rgba(255,255,255,0.05); }
-  .day-row.rest { cursor:default; opacity:0.4; }
+  .day-row:last-child{border-bottom:none;}
+  .day-row:active:not(.rest){background:rgba(141,198,63,0.05);}
+  .day-row.rest{cursor:default;opacity:0.35;}
 
-  .chk-wrap { flex-shrink:0; width:22px; height:22px; position:relative; }
-  .chk-wrap input[type=checkbox] { opacity:0; position:absolute; width:100%; height:100%; cursor:pointer; z-index:2; margin:0; }
-  .chk-box {
-    width:22px; height:22px; border:1.5px solid #3a3a3a; border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-    transition:all 0.15s; background:transparent; pointer-events:none;
+  .chk-wrap{flex-shrink:0;width:22px;height:22px;position:relative;}
+  .chk-wrap input[type=checkbox]{opacity:0;position:absolute;width:100%;height:100%;cursor:pointer;z-index:2;margin:0;}
+  .chk-box{
+    width:22px;height:22px;border:1.5px solid #2e2e2e;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.15s;background:transparent;pointer-events:none;
   }
-  .chk-wrap input:checked ~ .chk-box { background:var(--green); border-color:var(--green); }
-  .chk-wrap input:checked ~ .chk-box::after {
-    content:''; display:block; width:5px; height:9px;
-    border:2px solid #fff; border-top:none; border-left:none;
+  .chk-wrap input:checked ~ .chk-box{background:var(--green);border-color:var(--green);}
+  .chk-wrap input:checked ~ .chk-box::after{
+    content:'';display:block;width:5px;height:9px;
+    border:2px solid #000;border-top:none;border-left:none;
     transform:rotate(45deg) translateY(-1px);
   }
 
-  .day-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--light); min-width:26px; }
-  .day-pill { display:inline-flex; align-items:center; padding:3px 8px; border-radius:20px; font-size:11px; font-weight:500; white-space:nowrap; flex-shrink:0; }
-  .pill-s { background:rgba(45,106,79,0.25); color:#6fcf97; }
-  .pill-f { background:rgba(26,58,92,0.35); color:#7eb8f7; }
-  .pill-r { background:rgba(232,80,10,0.2); color:#f0936a; }
-  .pill-t { background:rgba(240,165,0,0.2); color:#f0c050; }
-  .pill-e { background:rgba(176,127,239,0.2); color:#c07fef; }
-  .pill-x { background:rgba(80,80,80,0.12); color:#444; font-size:10px; }
-  .pill-race { background:rgba(232,80,10,0.3); color:var(--orange); font-weight:700; }
+  .day-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--gray);min-width:26px;}
+  .day-pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap;flex-shrink:0;}
+  .pill-s{background:rgba(141,198,63,0.12);color:#8DC63F;}
+  .pill-f{background:rgba(141,198,63,0.22);color:#b2e060;}
+  .pill-r{background:rgba(255,100,50,0.15);color:#ff7a4a;}
+  .pill-t{background:rgba(255,200,50,0.15);color:#ffc840;}
+  .pill-e{background:rgba(80,180,255,0.15);color:#60b8ff;}
+  .pill-x{background:rgba(60,60,60,0.3);color:#333;font-size:10px;}
+  .pill-race{background:rgba(141,198,63,0.25);color:var(--green);font-weight:700;}
 
-  .day-desc { font-size:11px; color:#777; flex:1; line-height:1.4; min-width:0; }
-  .day-km-badge { font-family:'Bebas Neue',sans-serif; font-size:13px; color:#444; white-space:nowrap; flex-shrink:0; transition:color 0.2s; }
-  .day-row.checked .day-km-badge { color:var(--green); }
-  .day-row.checked .day-desc { color:#444; text-decoration:line-through; text-decoration-color:#333; }
-  .day-row.checked .day-label { color:#3a3a3a; }
+  .day-desc{font-size:11px;color:#555;flex:1;line-height:1.4;min-width:0;}
+  .day-km-badge{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#333;white-space:nowrap;flex-shrink:0;transition:color 0.2s;}
+  .day-row.checked .day-km-badge{color:var(--green);}
+  .day-row.checked .day-desc{color:#333;text-decoration:line-through;text-decoration-color:#2a2a2a;}
+  .day-row.checked .day-label{color:#2e2e2e;}
 
-  .rec-badge {
-    display:inline-block; background:rgba(240,165,0,0.1); color:var(--yellow);
-    font-size:8px; letter-spacing:2px; text-transform:uppercase;
-    padding:1px 5px; border-radius:3px; border:1px solid rgba(240,165,0,0.2); margin-left:6px;
+  .rec-badge{
+    display:inline-block;background:rgba(255,200,50,0.08);color:#ffc840;
+    font-size:8px;letter-spacing:2px;text-transform:uppercase;
+    padding:1px 5px;border-radius:3px;border:1px solid rgba(255,200,50,0.2);margin-left:6px;
   }
 
-  footer {
+  /* ── CITY BANNER ── */
+  .city-banner{
+    margin:0 20px 20px;border-radius:12px;overflow:hidden;
+    position:relative;height:100px;
+  }
+  .city-banner img{width:100%;height:100%;object-fit:cover;opacity:0.5;filter:grayscale(20%);}
+  .city-banner-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(13,13,13,0.8),rgba(13,13,13,0.2));
+    display:flex;align-items:center;padding:0 20px;
+  }
+  .city-banner-overlay p{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);}
+  .city-banner-overlay p span{color:var(--green);}
+
+  /* ── FOOTER ── */
+  footer{
     padding:20px 20px calc(20px + var(--safe-bottom));
-    border-top:1px solid #1a1a1a;
-    text-align:center;
+    border-top:1px solid #181818;text-align:center;
   }
-  footer p { font-size:10px; color:#2a2a2a; margin-bottom:4px; }
-  footer .goal { font-family:'Bebas Neue',sans-serif; font-size:16px; color:var(--orange); letter-spacing:2px; }
+  .footer-logo{
+    width:90px;margin:0 auto 10px;
+    filter:brightness(0) invert(1);opacity:0.25;display:block;
+  }
+  footer p{font-size:10px;color:#2a2a2a;margin-bottom:3px;}
+  footer .goal{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--green);letter-spacing:2px;}
 </style>
 </head>
 <body>
 
 <div id="install-banner">
-  <p><strong>Instalar app</strong>Guardá el tracker en tu pantalla de inicio para acceso rápido.</p>
+  <p><strong>Instalar app</strong>Guardala en tu pantalla de inicio.</p>
   <button class="install-btn" id="install-btn">Instalar</button>
   <button class="dismiss-btn" id="dismiss-btn">×</button>
 </div>
 
-<header>
-  <div class="h-inner">
-    <div class="h-top">
-      <div class="h-title">
-        <h1>TRACKER <span>42K</span></h1>
-        <p>Ljubljana · 18 Oct 2026 · ≤ 3:08:00</p>
-      </div>
-      <div class="h-stats">
-        <div class="hstat"><div class="n" id="stat-km-done">0</div><div class="l">km hechos</div></div>
-        <div class="hstat"><div class="n" id="stat-km-total">0</div><div class="l">km totales</div></div>
-        <div class="hstat"><div class="n" id="stat-sessions">0/0</div><div class="l">sesiones</div></div>
-      </div>
-    </div>
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" 
+    src="https://ljubljanskimaraton.si/enupload/gallery/667/maraton1.gif"
+    onerror="this.style.display='none'"
+    alt="Ljubljana Marathon">
+  <div class="hero-overlay">
+    <img class="hero-logo"
+      src="https://ljubljanskimaraton.si/images/nlb-lj-maraton_logop.svg"
+      onerror="this.style.display='none'"
+      alt="NLB Ljubljana Maraton">
+    <div class="hero-title">TRACKER <span>42K</span></div>
+    <div class="hero-sub">Heineken 0.0 Marathon · Ljubljana · 18 Oct 2026</div>
   </div>
-</header>
-
-<div class="global-bar-wrap">
-  <div class="global-label">Progreso</div>
-  <div class="global-bar-outer"><div class="global-bar-inner" id="global-fill" style="width:0%"></div></div>
-  <div class="global-pct" id="global-pct">0%</div>
-  <div class="global-km"><span id="g-km-done">0</span> / <span id="g-km-total">0</span> km</div>
-  <button class="reset-btn" onclick="resetAll()">↺ Reset</button>
 </div>
 
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-cell">
+    <div class="n" id="stat-km-done">0</div>
+    <div class="l">km hechos</div>
+  </div>
+  <div class="stat-cell">
+    <div class="n" id="stat-km-total">0</div>
+    <div class="l">km plan</div>
+  </div>
+  <div class="stat-cell">
+    <div class="n" id="stat-sessions">0/0</div>
+    <div class="l">sesiones</div>
+  </div>
+  <div class="stat-cell">
+    <div class="n">20</div>
+    <div class="l">semanas</div>
+  </div>
+</div>
+
+<!-- GLOBAL BAR -->
+<div class="global-wrap">
+  <div class="g-label">Progreso</div>
+  <div class="g-bar-out"><div class="g-bar-in" id="global-fill" style="width:0%"></div></div>
+  <div class="g-pct" id="global-pct">0%</div>
+  <div class="g-km"><span id="g-km-done">0</span> / <span id="g-km-total">0</span> km</div>
+  <button class="reset-btn" onclick="resetAll()">↺</button>
+</div>
+
+<!-- LEGEND -->
 <div class="legend">
-  <div class="li"><div class="ld" style="background:#6fcf97"></div>Suave</div>
-  <div class="li"><div class="ld" style="background:#7eb8f7"></div>Fondo</div>
-  <div class="li"><div class="ld" style="background:#f0936a"></div>Series</div>
-  <div class="li"><div class="ld" style="background:#f0c050"></div>Tempo</div>
-  <div class="li"><div class="ld" style="background:#c07fef"></div>Específico</div>
+  <div class="li"><div class="ld" style="background:#8DC63F"></div>Suave</div>
+  <div class="li"><div class="ld" style="background:#b2e060"></div>Fondo</div>
+  <div class="li"><div class="ld" style="background:#ff7a4a"></div>Series</div>
+  <div class="li"><div class="ld" style="background:#ffc840"></div>Tempo</div>
+  <div class="li"><div class="ld" style="background:#60b8ff"></div>Específico</div>
 </div>
 
 <div id="plan"></div>
 
 <footer>
+  <img class="footer-logo"
+    src="https://ljubljanskimaraton.si/images/nlb-lj-maraton_logop.svg"
+    onerror="this.style.display='none'"
+    alt="NLB Ljubljana Maraton">
   <p>Progreso guardado en tu dispositivo · Funciona offline</p>
   <div class="goal">18 OCT 2026 · LJUBLJANA · ≤ 3:08:00</div>
 </footer>
 
 <script>
-// ── SERVICE WORKER ──────────────────────────────────────────
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
-}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 
-// ── PWA INSTALL PROMPT ──────────────────────────────────────
-let deferredPrompt = null;
-const banner = document.getElementById('install-banner');
-const installBtn = document.getElementById('install-btn');
-const dismissBtn = document.getElementById('dismiss-btn');
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (!localStorage.getItem('pwa-dismissed')) banner.classList.add('show');
+let deferredPrompt=null;
+const banner=document.getElementById('install-banner');
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredPrompt=e;
+  if(!localStorage.getItem('pwa-dismissed')) banner.classList.add('show');
 });
-
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
+document.getElementById('install-btn').addEventListener('click',async()=>{
+  if(!deferredPrompt) return;
   deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === 'accepted') banner.classList.remove('show');
-  deferredPrompt = null;
+  const {outcome}=await deferredPrompt.userChoice;
+  if(outcome==='accepted') banner.classList.remove('show');
+  deferredPrompt=null;
 });
-
-dismissBtn.addEventListener('click', () => {
+document.getElementById('dismiss-btn').addEventListener('click',()=>{
   banner.classList.remove('show');
-  localStorage.setItem('pwa-dismissed', '1');
+  localStorage.setItem('pwa-dismissed','1');
 });
 
-// ── DATA ─────────────────────────────────────────────────────
-const STORAGE_KEY = 'tracker_ljubljana_2026_v2';
-
-const phases = [
-  {
-    num:'01', name:'BASE AERÓBICA',
-    desc:'Semanas 1–5 · Jun 2 – Jul 6 · 40→55 km/sem',
-    bar:'linear-gradient(90deg,#2d6a4f,#1a3a5c)',
-    weeks:[
-      { n:'Semana 1', d:'2–8 Jun', km:42, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50–6:00 min/km',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'10 km: 2 cal + 6 km a 4:45 + 2 vuelta',km:10},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo a 6:00',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km a 5:45–6:00 min/km',km:12},
-      ]},
-      { n:'Semana 2', d:'9–15 Jun', km:46, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50 min/km',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'12 km: 2+2 cal/vuelta + 5×1.000m a 4:20 (rec. 90s)',km:12},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50–6:00 min/km',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'14 km a 5:45 min/km',km:14},
-      ]},
-      { n:'Semana 3', d:'16–22 Jun', km:50, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:50 min/km',km:12},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'12 km: 2 cal + 8 km a 4:40 + 2 vuelta',km:12},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km a 5:40–5:50 min/km',km:16},
-      ]},
-      { n:'Semana 4', d:'23–29 Jun', km:38, recovery:true, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave a 6:00–6:10',km:8},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'10 km con 4×100m de progresión al final',km:10},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'8 km regenerativo',km:8},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km tranquilo a 5:50–6:00',km:12},
-      ]},
-      { n:'Semana 5', d:'30 Jun – 6 Jul', km:55, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:45 min/km',km:12},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'14 km: 2+2 cal/vuelta + 6×1.000m a 4:15 (rec. 90s)',km:14},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'11 km suave',km:11},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'18 km a 5:40 min/km',km:18},
-      ]},
-    ]
-  },
-  {
-    num:'02', name:'CONSTRUCCIÓN ESPECÍFICA',
-    desc:'Semanas 6–13 · Jul 7 – Ago 31 · 55→75 km/sem',
-    bar:'linear-gradient(90deg,#1a3a5c,#e8500a)',
-    weeks:[
-      { n:'Semana 6', d:'7–13 Jul', km:57, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:45',km:12},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'14 km: 2 cal + 10 km a 4:35 + 2 vuelta',km:14},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'12 km regenerativo',km:12},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'19 km a 5:35–5:45',km:19},
-      ]},
-      { n:'Semana 7', d:'14–20 Jul', km:60, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'13 km a 5:45',km:13},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'15 km: 2+2 cal/vuelta + 4×2.000m a 4:20 (rec. 2 min)',km:15},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'11 km suave',km:11},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'20 km a 5:35',km:20},
-      ]},
-      { n:'Semana 8', d:'21–27 Jul', km:44, recovery:true, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'10 km con 5×100m strides al final',km:10},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'14 km tranquilo',km:14},
-      ]},
-      { n:'Semana 9', d:'28 Jul – 3 Ago', km:63, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'16 km: 2 cal + 12 km a ritmo maratón (4:27) + 2 vuelta',km:16},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'12 km suave',km:12},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'21 km a 5:35',km:21},
-      ]},
-      { n:'Semana 10', d:'4–10 Ago', km:67, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'16 km: 2+2 cal/vuelta + 3×3.000m a 4:18 (rec. 2:30 min)',km:16},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km regenerativo',km:13},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'22 km a 5:30–5:40',km:22},
-      ]},
-      { n:'Semana 11', d:'11–17 Ago', km:70, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:40',km:15},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'17 km: 2 cal + 15 km a ritmo maratón (4:27) + 2 vuelta',km:17},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'14 km suave',km:14},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'24 km a 5:30',km:24},
-      ]},
-      { n:'Semana 12', d:'18–24 Ago', km:48, recovery:true, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'12 km: 2 cal + 8 km a 4:40 + 2 vuelta',km:12},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km tranquilo a 5:45',km:16},
-      ]},
-      { n:'Semana 13', d:'25–31 Ago', km:75, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'16 km a 5:35–5:45',km:16},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'17 km: 2+2 cal/vuelta + 5×2.000m a 4:18 (rec. 90s)',km:17},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'14 km suave',km:14},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'26 km a 5:25–5:35 ⚡ Fondo clave',km:26},
-      ]},
-    ]
-  },
-  {
-    num:'03', name:'PICO Y ESPECÍFICO MARATÓN',
-    desc:'Semanas 14–17 · Sep 1 – Sep 28 · 65→75 km/sem',
-    bar:'linear-gradient(90deg,#e8500a,#c44008)',
-    weeks:[
-      { n:'Semana 14', d:'1–7 Sep', km:70, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:40',km:15},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'18 km: 2 cal + 16 km a 4:27 (ritmo maratón exacto)',km:18},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km regenerativo',km:13},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'24 km progresivo: 5:40 → 5:00 últimos 5 km',km:24},
-      ]},
-      { n:'Semana 15', d:'8–14 Sep', km:73, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:35',km:15},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'17 km: 2+2 cal/vuelta + 2×5.000m a 4:22 (rec. 3 min)',km:17},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km suave',km:13},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'28 km a 5:25–5:35 ⚡ Fondo más largo del plan',km:28},
-      ]},
-      { n:'Semana 16', d:'15–21 Sep', km:50, recovery:true, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'14 km: 2 cal + 10 km a 4:27 + 2 vuelta',km:14},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km tranquilo a 5:45',km:16},
-      ]},
-      { n:'Semana 17', d:'22–28 Sep', km:65, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'16 km: 2 cal + 12 km a 4:27 + 2 vuelta',km:16},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km suave',km:13},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'20 km a 5:30 — último fondo largo',km:20},
-      ]},
-    ]
-  },
-  {
-    num:'04', name:'TAPERING',
-    desc:'Semanas 18–20 · Sep 29 – Oct 18 · Llegar fresco',
-    bar:'linear-gradient(90deg,#c44008,#333)',
-    weeks:[
-      { n:'Semana 18', d:'29 Sep – 5 Oct', km:48, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km suave a 5:50',km:12},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'14 km: 2 cal + 10 km a 4:27 + 2 vuelta',km:14},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
-        {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km a 5:40',km:12},
-      ]},
-      { n:'Semana 19', d:'6–12 Oct', km:32, recovery:false, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave a 6:00',km:10},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'10 km: 2 cal + 6 km a 4:27 + 2 vuelta',km:10},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave',km:8},
-        {day:'Dom',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-      ]},
-      { n:'Semana 20 · CARRERA', d:'13–18 Oct', km:42.2, recovery:false, race:true, days:[
-        {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave + strides',km:8},
-        {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'6 km + 4×100m a ritmo maratón',km:6},
-        {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
-        {day:'Sáb',type:'x',pill:'pill-x',label:'Descanso',desc:'Registro + descanso total',km:0},
-        {day:'Dom',type:'race',pill:'pill-race',label:'🏁 MARATÓN',desc:'Ljubljana · Objetivo: ≤ 3:08:00',km:42.2},
-      ]},
-    ]
-  }
+const STORAGE_KEY='tracker_ljubljana_2026_v2';
+const phases=[
+  {num:'01',name:'BASE AERÓBICA',desc:'Semanas 1–5 · Jun 2 – Jul 6 · 40→55 km/sem',bar:'linear-gradient(90deg,#2d5a1b,#1a3a5c)',weeks:[
+    {n:'Semana 1',d:'2–8 Jun',km:42,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50–6:00 min/km',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'10 km: 2 cal + 6 km a 4:45 + 2 vuelta',km:10},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo a 6:00',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km a 5:45–6:00 min/km',km:12},
+    ]},
+    {n:'Semana 2',d:'9–15 Jun',km:46,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50 min/km',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'12 km: 2+2 cal/vuelta + 5×1.000m a 4:20 (rec. 90s)',km:12},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km a 5:50–6:00 min/km',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'14 km a 5:45 min/km',km:14},
+    ]},
+    {n:'Semana 3',d:'16–22 Jun',km:50,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:50 min/km',km:12},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'12 km: 2 cal + 8 km a 4:40 + 2 vuelta',km:12},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km a 5:40–5:50 min/km',km:16},
+    ]},
+    {n:'Semana 4',d:'23–29 Jun',km:38,recovery:true,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave a 6:00–6:10',km:8},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'10 km con 4×100m de progresión al final',km:10},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'8 km regenerativo',km:8},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km tranquilo a 5:50–6:00',km:12},
+    ]},
+    {n:'Semana 5',d:'30 Jun – 6 Jul',km:55,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:45 min/km',km:12},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'14 km: 2+2 cal/vuelta + 6×1.000m a 4:15 (rec. 90s)',km:14},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'11 km suave',km:11},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'18 km a 5:40 min/km',km:18},
+    ]},
+  ]},
+  {num:'02',name:'CONSTRUCCIÓN ESPECÍFICA',desc:'Semanas 6–13 · Jul 7 – Ago 31 · 55→75 km/sem',bar:'linear-gradient(90deg,#1a3a5c,#2d5a1b)',weeks:[
+    {n:'Semana 6',d:'7–13 Jul',km:57,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km a 5:45',km:12},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'14 km: 2 cal + 10 km a 4:35 + 2 vuelta',km:14},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'12 km regenerativo',km:12},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'19 km a 5:35–5:45',km:19},
+    ]},
+    {n:'Semana 7',d:'14–20 Jul',km:60,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'13 km a 5:45',km:13},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'15 km: 2+2 cal/vuelta + 4×2.000m a 4:20 (rec. 2 min)',km:15},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'11 km suave',km:11},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'20 km a 5:35',km:20},
+    ]},
+    {n:'Semana 8',d:'21–27 Jul',km:44,recovery:true,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'10 km con 5×100m strides al final',km:10},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'14 km tranquilo',km:14},
+    ]},
+    {n:'Semana 9',d:'28 Jul – 3 Ago',km:63,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'16 km: 2 cal + 12 km a ritmo maratón (4:27) + 2 vuelta',km:16},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'12 km suave',km:12},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'21 km a 5:35',km:21},
+    ]},
+    {n:'Semana 10',d:'4–10 Ago',km:67,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'16 km: 2+2 cal/vuelta + 3×3.000m a 4:18 (rec. 2:30 min)',km:16},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km regenerativo',km:13},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'22 km a 5:30–5:40',km:22},
+    ]},
+    {n:'Semana 11',d:'11–17 Ago',km:70,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:40',km:15},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'17 km: 2 cal + 15 km a ritmo maratón (4:27) + 2 vuelta',km:17},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'14 km suave',km:14},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'24 km a 5:30',km:24},
+    ]},
+    {n:'Semana 12',d:'18–24 Ago',km:48,recovery:true,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-t',label:'Tempo',desc:'12 km: 2 cal + 8 km a 4:40 + 2 vuelta',km:12},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km tranquilo a 5:45',km:16},
+    ]},
+    {n:'Semana 13',d:'25–31 Ago',km:75,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'16 km a 5:35–5:45',km:16},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'17 km: 2+2 cal/vuelta + 5×2.000m a 4:18 (rec. 90s)',km:17},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'14 km suave',km:14},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'26 km a 5:25–5:35 ⚡ Fondo clave',km:26},
+    ]},
+  ]},
+  {num:'03',name:'PICO Y ESPECÍFICO MARATÓN',desc:'Semanas 14–17 · Sep 1 – Sep 28 · 65→75 km/sem',bar:'linear-gradient(90deg,#2d5a1b,#6fa832)',weeks:[
+    {n:'Semana 14',d:'1–7 Sep',km:70,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:40',km:15},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'18 km: 2 cal + 16 km a 4:27 (ritmo maratón exacto)',km:18},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km regenerativo',km:13},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'24 km progresivo: 5:40 → 5:00 últimos 5 km',km:24},
+    ]},
+    {n:'Semana 15',d:'8–14 Sep',km:73,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'15 km a 5:35',km:15},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-r',label:'Series',desc:'17 km: 2+2 cal/vuelta + 2×5.000m a 4:22 (rec. 3 min)',km:17},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km suave',km:13},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'28 km a 5:25–5:35 ⚡ Fondo más largo del plan',km:28},
+    ]},
+    {n:'Semana 16',d:'15–21 Sep',km:50,recovery:true,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'14 km: 2 cal + 10 km a 4:27 + 2 vuelta',km:14},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'16 km tranquilo a 5:45',km:16},
+    ]},
+    {n:'Semana 17',d:'22–28 Sep',km:65,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'14 km a 5:40',km:14},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'16 km: 2 cal + 12 km a 4:27 + 2 vuelta',km:16},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'13 km suave',km:13},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'20 km a 5:30 — último fondo largo',km:20},
+    ]},
+  ]},
+  {num:'04',name:'TAPERING',desc:'Semanas 18–20 · Sep 29 – Oct 18 · Llegar fresco',bar:'linear-gradient(90deg,#6fa832,#3a3a3a)',weeks:[
+    {n:'Semana 18',d:'29 Sep – 5 Oct',km:48,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'12 km suave a 5:50',km:12},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'14 km: 2 cal + 10 km a 4:27 + 2 vuelta',km:14},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'10 km regenerativo',km:10},
+      {day:'Dom',type:'t',pill:'pill-f',label:'Fondo',desc:'12 km a 5:40',km:12},
+    ]},
+    {n:'Semana 19',d:'6–12 Oct',km:32,recovery:false,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'10 km muy suave a 6:00',km:10},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-e',label:'Específico',desc:'10 km: 2 cal + 6 km a 4:27 + 2 vuelta',km:10},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave',km:8},
+      {day:'Dom',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+    ]},
+    {n:'Semana 20 · CARRERA',d:'13–18 Oct',km:42.2,recovery:false,race:true,days:[
+      {day:'Lun',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Mar',type:'t',pill:'pill-s',label:'Suave',desc:'8 km muy suave + strides',km:8},
+      {day:'Mié',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Jue',type:'t',pill:'pill-s',label:'Suave',desc:'6 km + 4×100m a ritmo maratón',km:6},
+      {day:'Vie',type:'x',pill:'pill-x',label:'Descanso',desc:'',km:0},
+      {day:'Sáb',type:'x',pill:'pill-x',label:'Descanso',desc:'Registro + descanso total',km:0},
+      {day:'Dom',type:'race',pill:'pill-race',label:'🏁 MARATÓN',desc:'Ljubljana · Objetivo: ≤ 3:08:00',km:42.2},
+    ]},
+  ]},
 ];
 
-// ── STATE ────────────────────────────────────────────────────
-let state = {};
-const SKEY = (w,d) => `w${w}_d${d}`;
-function loadState() { try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { state = {}; } }
-function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
-function resetAll() {
-  if (!confirm('¿Resetear todo el progreso?')) return;
-  state = {}; saveState();
-  document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
-  document.querySelectorAll('.day-row').forEach(r => r.classList.remove('checked'));
+let state={};
+const SKEY=(w,d)=>`w${w}_d${d}`;
+function loadState(){try{state=JSON.parse(localStorage.getItem(STORAGE_KEY))||{};}catch(e){state={};}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+function resetAll(){
+  if(!confirm('¿Resetear todo el progreso?')) return;
+  state={};saveState();
+  document.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.checked=false);
+  document.querySelectorAll('.day-row').forEach(r=>r.classList.remove('checked'));
   updateAll();
 }
+function fmt(v){return v%1===0?v:v.toFixed(1);}
 
-// ── UPDATE ───────────────────────────────────────────────────
-function fmt(v) { return v % 1 === 0 ? v : v.toFixed(1); }
-
-function updateAll() {
-  let totalKm=0, doneKm=0, totalSess=0, doneSess=0;
-  let wIdx=0;
-  phases.forEach(ph => {
-    ph.weeks.forEach(wk => {
-      let wkTotal=0, wkDone=0;
-      wk.days.forEach((day,dIdx) => {
-        if (day.type !== 'x') {
-          wkTotal += day.km; totalKm += day.km; totalSess++;
-          if (state[SKEY(wIdx,dIdx)]) { wkDone += day.km; doneKm += day.km; doneSess++; }
+function updateAll(){
+  let tKm=0,dKm=0,tS=0,dS=0,wIdx=0;
+  phases.forEach(ph=>{
+    ph.weeks.forEach(wk=>{
+      let wT=0,wD=0;
+      wk.days.forEach((day,dIdx)=>{
+        if(day.type!=='x'){
+          wT+=day.km;tKm+=day.km;tS++;
+          if(state[SKEY(wIdx,dIdx)]){wD+=day.km;dKm+=day.km;dS++;}
         }
       });
-      const card = document.getElementById(`wk-${wIdx}`);
-      if (card) {
-        const pct = wkTotal ? Math.round(wkDone/wkTotal*100) : 0;
-        card.querySelector('.wk-prog-fill').style.width = pct+'%';
-        const el = card.querySelector('.km-done');
-        el.textContent = fmt(wkDone);
-        el.className = 'km-done' + (wkDone===0?' zero':'');
-        if (pct===100) card.classList.add('complete'); else card.classList.remove('complete');
+      const card=document.getElementById(`wk-${wIdx}`);
+      if(card){
+        const pct=wT?Math.round(wD/wT*100):0;
+        card.querySelector('.wk-prog-fill').style.width=pct+'%';
+        const el=card.querySelector('.km-done');
+        el.textContent=fmt(wD);
+        el.className='km-done'+(wD===0?' zero':'');
+        if(pct===100) card.classList.add('complete'); else card.classList.remove('complete');
       }
       wIdx++;
     });
   });
-  const pct = totalKm ? Math.round(doneKm/totalKm*100) : 0;
-  document.getElementById('global-fill').style.width = pct+'%';
-  document.getElementById('global-pct').textContent = pct+'%';
-  document.getElementById('g-km-done').textContent = fmt(doneKm);
-  document.getElementById('g-km-total').textContent = fmt(totalKm);
-  document.getElementById('stat-km-done').textContent = fmt(doneKm);
-  document.getElementById('stat-km-total').textContent = fmt(totalKm);
-  document.getElementById('stat-sessions').textContent = `${doneSess}/${totalSess}`;
+  const pct=tKm?Math.round(dKm/tKm*100):0;
+  document.getElementById('global-fill').style.width=pct+'%';
+  document.getElementById('global-pct').textContent=pct+'%';
+  document.getElementById('g-km-done').textContent=fmt(dKm);
+  document.getElementById('g-km-total').textContent=fmt(tKm);
+  document.getElementById('stat-km-done').textContent=fmt(dKm);
+  document.getElementById('stat-km-total').textContent=fmt(tKm);
+  document.getElementById('stat-sessions').textContent=`${dS}/${tS}`;
 }
 
-// ── RENDER ───────────────────────────────────────────────────
-function render() {
+function render(){
   loadState();
-  const container = document.getElementById('plan');
-  let wIdx=0, html='';
-  phases.forEach(ph => {
-    html += `<div class="phase-hdr"><div class="ph-num">${ph.num}</div><div class="ph-info"><h2>${ph.name}</h2><p>${ph.desc}</p></div></div>
+  const container=document.getElementById('plan');
+  let wIdx=0,html='';
+  phases.forEach((ph,phIdx)=>{
+    html+=`<div class="phase-hdr"><div class="ph-num">${ph.num}</div><div class="ph-info"><h2>${ph.name}</h2><p>${ph.desc}</p></div></div>
     <div class="ph-bar" style="background:${ph.bar};margin:0 20px 16px;"></div>
     <div class="weeks">`;
-    ph.weeks.forEach(wk => {
-      const isRace = wk.race||false;
-      html += `<div class="week-card${isRace?' race-week':''}" id="wk-${wIdx}">
+    ph.weeks.forEach(wk=>{
+      const isRace=wk.race||false;
+      html+=`<div class="week-card${isRace?' race-week':''}" id="wk-${wIdx}">
         <div class="wk-head">
           <div class="wk-left">
             <div class="wn">${wk.n}${wk.recovery?`<span class="rec-badge">↓ Recovery</span>`:''}</div>
@@ -563,39 +586,58 @@ function render() {
           </div>
         </div>
         <div class="wk-body">`;
-      wk.days.forEach((day,dIdx) => {
-        const key = SKEY(wIdx,dIdx);
-        const checked = !!state[key];
-        const isRest = day.type==='x';
-        html += `<div class="day-row${isRest?' rest':''}${checked?' checked':''}" id="row-${wIdx}-${dIdx}" ${!isRest?`onclick="toggle(${wIdx},${dIdx})"`:''}>`;
-        if (!isRest) {
-          html += `<div class="chk-wrap"><input type="checkbox" id="cb-${wIdx}-${dIdx}" ${checked?'checked':''} onchange="toggle(${wIdx},${dIdx})" onclick="event.stopPropagation()"><div class="chk-box"></div></div>`;
+      wk.days.forEach((day,dIdx)=>{
+        const key=SKEY(wIdx,dIdx);
+        const checked=!!state[key];
+        const isRest=day.type==='x';
+        html+=`<div class="day-row${isRest?' rest':''}${checked?' checked':''}" id="row-${wIdx}-${dIdx}" ${!isRest?`onclick="toggle(${wIdx},${dIdx})"`:''}>`;
+        if(!isRest){
+          html+=`<div class="chk-wrap"><input type="checkbox" id="cb-${wIdx}-${dIdx}" ${checked?'checked':''} onchange="toggle(${wIdx},${dIdx})" onclick="event.stopPropagation()"><div class="chk-box"></div></div>`;
         } else {
-          html += `<div style="width:22px;flex-shrink:0"></div>`;
+          html+=`<div style="width:22px;flex-shrink:0"></div>`;
         }
-        html += `<div class="day-label">${day.day}</div>
+        html+=`<div class="day-label">${day.day}</div>
           <span class="day-pill ${day.pill}">${day.label}</span>
           ${day.desc?`<div class="day-desc">${day.desc}</div>`:''}
           ${day.km>0?`<div class="day-km-badge">${fmt(day.km)} km</div>`:''}
         </div>`;
       });
-      html += `</div></div>`;
+      html+=`</div></div>`;
+      // City banner between phases
+      if(isRace){
+        html+=`<div style="height:8px"></div>`;
+      }
       wIdx++;
     });
-    html += `</div>`;
+    // Ljubljana photo banner between phases
+    if(phIdx<phases.length-1){
+      const cityImgs=[
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Ljubljana_Triple_Bridge.jpg/1280px-Ljubljana_Triple_Bridge.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Ljubljana_castle.jpg/1280px-Ljubljana_castle.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ljubljana_-_Old_Town.jpg/1280px-Ljubljana_-_Old_Town.jpg',
+      ];
+      const labels=['TRIPLE BRIDGE · LJUBLJANA','LJUBLJANA CASTLE','STARI TRG · OLD TOWN'];
+      html+=`</div>
+      <div class="city-banner">
+        <img src="${cityImgs[phIdx%3]}" onerror="this.style.display='none'" alt="Ljubljana" loading="lazy">
+        <div class="city-banner-overlay"><p><span>LJUBLJANA</span> · ${labels[phIdx%3]}</p></div>
+      </div>`;
+    } else {
+      html+=`</div>`;
+    }
   });
-  container.innerHTML = html;
+  container.innerHTML=html;
   updateAll();
 }
 
-function toggle(wIdx, dIdx) {
-  const key = SKEY(wIdx,dIdx);
-  state[key] = !state[key];
+function toggle(wIdx,dIdx){
+  const key=SKEY(wIdx,dIdx);
+  state[key]=!state[key];
   saveState();
-  const cb = document.getElementById(`cb-${wIdx}-${dIdx}`);
-  const row = document.getElementById(`row-${wIdx}-${dIdx}`);
-  if (cb) cb.checked = state[key];
-  if (row) { if(state[key]) row.classList.add('checked'); else row.classList.remove('checked'); }
+  const cb=document.getElementById(`cb-${wIdx}-${dIdx}`);
+  const row=document.getElementById(`row-${wIdx}-${dIdx}`);
+  if(cb) cb.checked=state[key];
+  if(row){if(state[key]) row.classList.add('checked'); else row.classList.remove('checked');}
   updateAll();
 }
 
