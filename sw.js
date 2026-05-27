@@ -1,4 +1,4 @@
-const CACHE = 'ljubljana-v2';
+const CACHE = 'ljubljana-v4';
 const ASSETS = [
   './index.html',
   './manifest.json',
