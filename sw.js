@@ -1,4 +1,4 @@
-const CACHE = 'ljubljana-v6';
+const CACHE = 'ljubljana-v7';
 
 // Network-first strategy: always try network, fallback to cache
 async function networkFirst(request) {
