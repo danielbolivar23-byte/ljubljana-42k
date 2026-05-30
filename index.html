@@ -164,6 +164,79 @@
   .footer-logo{height:28px;margin:0 auto 10px;filter:brightness(0) invert(1);opacity:0.2;display:block;}
   footer p{font-size:10px;color:#333;margin-bottom:4px;}
   footer .goal{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--green);letter-spacing:2px;}
+
+  /* DARK/LIGHT MODE TOGGLE */
+  .theme-btn{
+    background:transparent;border:1px solid #333;color:#888;
+    font-size:16px;padding:5px 9px;border-radius:6px;cursor:pointer;
+    line-height:1;flex-shrink:0;
+  }
+  .theme-btn:active{border-color:#666;}
+
+  /* LIGHT MODE */
+  body.light{
+    background:#f5f5f5;color:#111;
+  }
+  body.light .hero{background:#e8e8e8;}
+  body.light .hero-overlay{background:linear-gradient(to bottom,rgba(240,240,240,0.1) 0%,rgba(240,240,240,0.7) 60%,#f5f5f5 100%);}
+  body.light .hero-title{color:#111;}
+  body.light .hero-logo{filter:none;opacity:1;}
+  body.light .hero-sub{color:#444;}
+  body.light .stats-row{background:#ececec;border-color:#ddd;}
+  body.light .stat-cell{border-color:#ddd;}
+  body.light .stat-cell .l{color:#666;}
+  body.light .global-wrap{background:#ececec;border-color:#ddd;}
+  body.light .g-label{color:#666;}
+  body.light .g-bar-out{background:#ddd;}
+  body.light .g-km{color:#666;}
+  body.light .g-km span{color:#111;}
+  body.light .reset-btn{border-color:#ccc;color:#888;}
+  body.light .theme-btn{border-color:#ccc;color:#555;}
+  body.light .legend{background:#ececec;border-color:#ddd;}
+  body.light .li{color:#555;}
+  body.light .phase-hdr{border-color:#ddd;}
+  body.light .ph-num{color:#ddd;}
+  body.light .ph-info h2{color:#111;}
+  body.light .ph-info p{color:#666;}
+  body.light .week-card{background:#fff;border-color:#e0e0e0;}
+  body.light .week-card.complete{border-color:rgba(141,198,63,0.6);}
+  body.light .wk-head{background:#f0f0f0;}
+  body.light .wk-left .wn{color:#555;}
+  body.light .wk-left .wd{color:#aaa;}
+  body.light .km-sep{color:#bbb;}
+  body.light .km-total-val{color:#aaa;}
+  body.light .km-unit{color:#bbb;}
+  body.light .km-done.zero{color:#ccc;}
+  body.light .wk-prog-bar{background:#e0e0e0;}
+  body.light .collapse-btn{color:#888;border-color:#ddd;}
+  body.light .day-row{border-color:#f0f0f0;}
+  body.light .day-row:active:not(.rest){background:rgba(141,198,63,0.08);}
+  body.light .day-row.rest{opacity:0.4;}
+  body.light .day-label{color:#888;}
+  body.light .day-desc{color:#111 !important;}
+  body.light .day-row.checked .day-desc{color:#bbb !important;}
+  body.light .day-row.checked .day-label{color:#ccc;}
+  body.light .chk-box{border-color:#ccc;}
+  body.light .pill-x{background:rgba(0,0,0,0.06);color:#aaa;}
+  body.light .day-km-badge{color:#bbb;}
+  body.light .city-banner-overlay{background:linear-gradient(90deg,rgba(245,245,245,0.85) 0%,rgba(245,245,245,0.2) 100%);}
+  body.light .city-banner-text{color:#111;}
+  body.light footer{border-color:#ddd;}
+  body.light footer p{color:#bbb;}
+  body.light .footer-logo{filter:none;opacity:0.15;}
+  body.light #install-banner{background:#fff;border-color:var(--green);}
+  body.light #install-banner p{color:#444;}
+  body.light #install-banner p strong{color:#111;}
+
+  /* COLLAPSE */
+  .wk-body{padding:6px 14px 12px;transition:all 0.2s;}
+  .week-card.collapsed .wk-body{display:none;}
+  .collapse-btn{
+    background:transparent;border:1px solid #333;color:#666;
+    font-size:11px;padding:3px 7px;border-radius:5px;cursor:pointer;
+    line-height:1;flex-shrink:0;transition:transform 0.2s;
+  }
+  .week-card.collapsed .collapse-btn{transform:rotate(-90deg);}
 </style>
 </head>
 <body>
@@ -186,7 +259,7 @@
         onerror="this.style.display='none'"
         alt="NLB Ljubljana Maraton">
     </div>
-    <div class="hero-title">TRACKER <span>42K</span></div>
+    <img src="icons/icon-192.png" alt="Ljubljana 42K" style="height:64px;width:64px;border-radius:50%;object-fit:cover;margin-bottom:6px;border:2px solid var(--green);">
     <div class="hero-sub">Heineken 0.0 Marathon · Ljubljana · 18 Oct 2026</div>
   </div>
 </div>
@@ -204,6 +277,7 @@
   <div class="g-pct" id="global-pct">0%</div>
   <div class="g-km"><span id="g-km-done">0</span> / <span id="g-km-total">0</span> km</div>
   <button class="reset-btn" onclick="resetAll()">↺</button>
+  <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Modo claro/oscuro">☀️</button>
 </div>
 
 <div class="legend">
@@ -526,6 +600,7 @@ function render(){
               </div>
               <div class="wk-prog-bar"><div class="wk-prog-fill" style="width:0%"></div></div>
             </div>
+            <button class="collapse-btn" onclick="toggleWeek(${wIdx},event)" title="Colapsar/expandir">▼</button>
           </div>
         </div>
         <div class="wk-body">`;
@@ -577,7 +652,42 @@ function toggle(wIdx,dIdx){
   updateAll();
 }
 
+// ── THEME ────────────────────────────────────────────────────
+function toggleTheme(){
+  const isLight = document.body.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
+}
+function loadTheme(){
+  if(localStorage.getItem('theme')==='light'){
+    document.body.classList.add('light');
+    document.getElementById('theme-btn').textContent='🌙';
+  }
+}
+
+// ── COLLAPSE ─────────────────────────────────────────────────
+function toggleWeek(wIdx, e){
+  e.stopPropagation();
+  const card = document.getElementById(`wk-${wIdx}`);
+  const isCollapsed = card.classList.toggle('collapsed');
+  // save collapse state
+  const cState = JSON.parse(localStorage.getItem('collapse_state')||'{}');
+  cState[wIdx] = isCollapsed;
+  localStorage.setItem('collapse_state', JSON.stringify(cState));
+}
+function loadCollapseState(){
+  const cState = JSON.parse(localStorage.getItem('collapse_state')||'{}');
+  Object.keys(cState).forEach(wIdx=>{
+    if(cState[wIdx]){
+      const card = document.getElementById(`wk-${wIdx}`);
+      if(card) card.classList.add('collapsed');
+    }
+  });
+}
+
 render();
+loadTheme();
+loadCollapseState();
 </script>
 </body>
 </html>
